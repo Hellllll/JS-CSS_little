@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>提取字符串（交换姓名的位置）</title>
+<script>
+window.onload = initForms;
+
+function initForms(){
+	for(var i=0;i<document.forms.length;i++){
+	document.forms[i].onsubmit = validForm;	
+	}
+	}
+	
+function validForm(){
+	var allTags = document.getElementsByTagName("*");
+	
+	for(var i=0;i<allTags.length; i++){
+	validTag(allTags[i]);
+	}
+	return false;
+	
+	function validTag(thisTag){
+		var allClasses = thisTag.className.split(" ");
+		
+		for(var j=0;j<allClasses.length;j++){
+			validBaseOnClass(allClasses[j]);
+			}
+		function validBaseOnClass(thisClass){
+			switch(thisClass){
+				case "":
+				break;
+				case "nameList":
+					thisTag.value = nameList(thisTag.value);
+				default:
+				}
+			}
+			
+		/*function nameList(inNameList){
+			var newNames = new Array;
+			var newNameField = "";
+			
+			var re = /\s*\n\s*/;//以空格符和换行字符为文件分隔符
+		/*	var nameList = inNameList.split(re);
+			
+			re = /(\S+)\s(\S+)/;
+			for(var k=0;k<nameList.length;k++){
+				newNames[k] = nameList[k].replace(re, "$2,$1");
+				}
+			for(k=0; k<newNames.length;k++){
+				newNameField += newNames[k]+"\n";
+				}
+			return newNameField;
+			}*/
+			
+		//格式化字符串：例如如何获得一系列姓名并将它们的首字母转换为大写格式
+		
+		function nameList(inNameList){
+			var newNames = new Array;
+			var newNameField = "";
+			var re = /\s*\n\s*/;//这里到底是怎么一回事？
+			var nameList = inNameList.split(re);//保存所有姓名
+			
+			re = /^(\S)(\S+)\s(\S)(\S+)$/;//圆括号的作用,寻找“名字，空格，姓氏”
+			
+			for(var k=0;k<nameList.length;k++){
+				if(nameList[k]){
+					re.exec(nameList[k]);//使用此方法在nameList[k]上执行正则表达式re,并自动设置内置对象RegExp对象
+				newNames[k] = RegExp.$1.toUpperCase()+RegExp.$2.toLowerCase()+""+RegExp.$3.toUpperCase()+RegExp.$4.toLowerCase();
+					}
+				} 
+				for(k=0; k<newNames.length;k++){
+					newNameField += newNames[k]+"\n";
+					}
+					return newNameField;
+			}
+			
+			//对字符串进行格式化和排序（姓氏在前的姓名列表，按照字母表排序）
+			function nameList(inNameList){
+				var newNames = new Array;
+				var newNameField = "";
+				var  re = /\s*\n\s*/;
+				var nameList = inNameList.split(re);
+				
+				re = /^(\S)(\S+)\s(\S)(\S+)$/;
+				
+				for(var k = 0;k<nameList.length;k++){
+					if(nameList[k]){
+						re.exec(nameList[k]);
+						newNames[k] = RegExp.$3.toUpperCase()+RegExp.$4.toLowerCase()+","+RegExp.$1.toUpperCase()+RegExp.$2.toLowerCase();
+						}
+				}
+						newNames.sort();
+					for(var k=0;k<nameList.length;k++){
+						 newNameField += newNames[k]+"\n";
+						}
+					return newNameField;
+				
+				}
+		}
+	}
+</script>
+</head>
+
+<body>
+<h1>Reverse a list of names.</h1>
+<form>
+<p>Enter a list of names with first name first,one per line：</p>
+<textarea rows="6" cols="26" class="nameList"></textarea><br />
+<input type="submit" value="Submit"/>&nbsp;<input type="reset" value="Reset" />
+</form>
+</body>
+</html>

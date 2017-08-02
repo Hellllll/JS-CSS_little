@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>模块模式</title>
+<script>
+var singleton=function(){
+	//私有变量和私有函数
+	var privateVariable=10;
+	
+	function privateFunction(){return false;}
+
+	//特权/共有方法和属性
+	
+	return{
+		publicProperty:true,
+		publicMethod:function(){
+			privateVariable++;
+			return privateFunction();
+			}
+		
+		};
+}();//这里是怎么回事。
+
+
+var application=function(){
+	//私有变量和函数
+	var components=new Array();
+	components.puhs(new BaseComponent());
+	//公共
+	
+	return {
+		getComponentCount:function(){
+			return components.length;
+			},
+			registerComponent:function(component){
+				if(typeof component=="object"){
+					components.push(component);
+					}
+				
+				}
+		
+		};
+	}();//这算什么
+	
+	//增强的模块模式
+	
+	var singleton=function(){
+		//私有变量和私有函数
+		var privateVariable=10;
+		function privateFunction(){
+			return false;
+			}
+			//创建对象
+		var object =new CustomType();
+		//添加特权、共有属性和方法
+		object.publicProperty=true;
+		object.publicMethod=function(){
+			privateVariable++;
+			return privateFunction();
+			};
+		
+		//返回这个对象
+		return object;
+		}();
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

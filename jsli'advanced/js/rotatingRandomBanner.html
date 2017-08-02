@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><meta charset="utf-8">
+	rotating random banner
+	</title>
+	<script type="text/javascript">
+		window.onload = choosePic;
+
+		var adImages = new Array("","",);
+		var thisAd = 0;
+
+		function choosePic(){
+			thisAd = Math.floor(Math.random()*adImages.length);
+			document.getElementById("adBanner").src = adImages[thisAd];
+
+			rotate();
+		}
+
+		function rotate(){
+			thisAd++;
+			if (thisAd == adImages.length) {
+				thisAd = 0;
+			}
+			document.getElementById("adBanner").src = adImages[thisAd];
+
+			setTimeout(rotate,3*1000);
+		}
+	</script>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+<div class="centered">
+	<img src="images/" id="adBanner" alt="Ad Banner">
+</div>
+</body>
+</html>

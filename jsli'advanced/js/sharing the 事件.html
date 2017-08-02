@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>sharing the same form 事件</title>
+<script src="EventUtil.js"></script>
+<script>
+var textbox = document.forms[0].elememts[0];
+
+EventUtil.addHandler(textbox,"focus",function(event){
+	event = EventUtil.getEvent(event);
+	var terget = EventUtil.getTarget(event);
+	
+	if(target.style.background != "red"){
+		target.style.background = "yellow";
+		}
+	});
+	
+EventUtil.addHandler(textbox,"blur",function(event){
+	event = EventUtil.getEvent(event);
+	var terget = EventUtil.getTarget(event);
+	
+	if(/[^\d]/.test(target.value)){
+		target.style.background = "red";
+		}
+	else{
+		target.style.background = "";
+		}
+	});
+	
+EventUtil.addHandler(textbox,"change",function(event){
+	event = EventUtil.getEvent(event);
+	var terget = EventUtil.getTarget(event);
+	
+	if(/[^\d]/.test(target.value)){
+		target.style.background = "red";
+		}
+	else{
+		target.style.background = "";
+		}
+	});
+</script>
+</head>
+
+<body>
+<form>
+<input type="text" />
+</form>
+</body>
+</html>

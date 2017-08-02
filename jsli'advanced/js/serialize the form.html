@@ -1,0 +1,70 @@
+<font face="Georgia, Times New Roman, Times, serif"></font><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>表单序列化（浏览器怎样将数据传给服务器）</title>
+<script>
+//这个函数的作用到底是什么，还是不懂什么表单序列化。
+function serialize(form){
+	var parts = [],//这是什么定义方法，回顾数组定义的方法
+	field = null,
+	i,
+	len,
+	j,
+	optLen,
+	option,
+	optValue;
+	
+	for(i=0,len = form.elements.length;i<len;i++){
+		field = form.elements[i];
+		
+		switch(field.type){
+			case "select-one":
+			case "select-multiple": //分析单选框和多选框的情况
+			
+			if(field.name.length){
+				for(j=0,optLen = field.options.length;j<optLen;j++){
+					option = field.option[j];
+					if(option.hasAtrribute){      //DOM兼容浏览器中使用
+						optValue = (option.hasAtrribute("value")?option.value : option.text);
+						}
+					else{
+						optValue = (option.atrributes["value"].specified ? option.value:option.text);
+						}
+						//在IE中使用特性的specified属性
+						parts.push(encodeURIComponent(field.name)+"="+encodeURIComponent(optValue));
+						//这里没搞懂
+					}				
+				}//shit,又在胡思乱想什么呢，耐不住寂寞，神经病，are you ok
+			
+			case undefined: //字段集
+			case "file"://文件输入
+			case "submit": //提交按钮
+			case "reset":
+			case "button":
+			      break;
+			case "radio":
+			     if(!field.checked){
+					 break;
+					 }	  
+				  
+				  //执行默认操作
+				  
+				  default:
+				     //不包含没有名字的表单字段
+				    if(field.name.length){
+						parts.push(encodeURIComponent(field.name)+"="+
+						encodeURIComponent(field.value)//将当前字段的名称和值进行编码
+						);
+						}		  
+	  		
+		}	
+	}
+	return parts.join("&");
+}
+</script>
+</head>
+
+<body>
+</body>
+</html>

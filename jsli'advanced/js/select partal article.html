@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>选择部分文本</title>
+<script>
+var textbox=document.getElementById("textbox");
+function selectText(textbox,startIndex,endIndex){
+	if(textbox.setSelectionRange){
+		textbox.setSelectionRange(startIndex,endIndex);
+		} else if (textbox.createTextRange){
+			var range = textbox.createTextRange();
+			range.collapse(true);
+			range.moveStart("character",startIndex);
+			range.moveEnd("character",stopIndex - startIndex);
+			range.select();
+			}
+		textbox.focus();
+	}
+	
+texbox.value = "Hello World.";
+alert(selectText(textbox,0,text.value.length));//hello world.
+selectText(textbox,0,3);
+selectText(textbox,4,7);
+</script>
+</head>
+
+<body>
+<form>
+<input type="text"  id="textbox"/>
+</form>
+</body>
+</html>

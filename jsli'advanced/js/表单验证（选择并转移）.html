@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>选择并转移(how to realize it!)</title>
+<style>
+.centered{
+	text-align:center;
+	}
+</style>
+<script>
+window.onload = initForm();
+window.onunload = function(){};//作用：处理某些浏览器的古怪行为，否则，当单击浏览器的back按钮时，就不会触发onload事件
+
+function initForm(){
+	document.getElementById("newLocation").selectedIndex = 0;//这里有问题？
+	document.getElementById("newLocation").onchange = jumpPage;//change事件的使用，以及不同表单字段的change差异
+	}
+function jumpPage(){
+	var newLoc = document.getElementById("newLocation");
+	var newPage = newLoc.options[newLoc.selectedIndex].value;
+	if(newPage !=""){
+		window.location = newPage;
+		}
+	}
+</script>
+
+</head>
+
+<body>
+<form action="gotolocation.cgi" class="centered"><!--使表单从一个页面跳转到另一个页面的方法是使用cgi-->
+<select id="newLocation">
+<option selected="selected">Select a topic</option>
+<option value="创建对象1.html">Cross-checking fields</option>
+<option value="创建对象2.html">validating fields</option>
+<option value="创建对象3.html">initmate fields</option>
+<option value="bind()方法.html">Happy fields</option>
+</select>
+<noscript>
+<input type="submit" value="Go There!" />
+</noscript>
+</form>
+</body>
+</html>

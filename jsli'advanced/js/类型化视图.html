@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WebGL</title>
+<script>
+var buffer = new ArrayBuffer(20);//在内存中分配20B
+var bytes = buffer.byteLength;
+
+//视图
+var view = new DataView(buffer, 9);//开始于字节9的偏移量
+
+var view = new DataView(buffer,9, 10);
+alert(view.byteOffset);
+alert(view.byteLength);
+
+//DataView 的读取方
+view.setUint16(0, 25);
+view.setUint16(2,50);
+var value = view.getUint16(0);
+
+view.setUint16(0,25);
+value = view.getInt8(0);
+alert(value);//0,注意这里的情况
+
+//类型化视图（类型化数组）
+//创建一个新数组， 使用整个缓冲区
+
+var int8s = new Int8Array(buffer);
+var int16s = new Int16Array(buffer,9,10);
+//可以不用首先创建ArrayBuffer对象
+var int8s = new Int8Array(10);
+
+//可以把常规数组转化为类型化视图，如下：
+var int8s = new Int8Arrray([10,20,30,40,50]);//可用来初始化类型化视图
+//对类型化对象进行迭代
+
+for(var i=0;i<int8s.length;i++){
+	console.log("value at position"+i+"is"+int8s[i]);
+	}
+//subarray()基于底层缓冲器的子集创建的一个新视图
+var uint16s = new Uint16Array(10),
+ sub = uint16s.subarray(2,5);//开始元素的索引和可选的结束元素的索引。通过大视图创建小视图的好处在于无须担心修改了其他元素
+
+
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

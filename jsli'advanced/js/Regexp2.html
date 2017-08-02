@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>regexp2</title>
+<script>
+var pattern1=/\[bc\]at/i;
+
+alert(pattern1.global);
+alert(pattern1.ignoreCase);
+alert(pattern1.multiline);
+alert(pattern1.lastIndex);
+alert(pattern1.source);
+
+var pattern2=new RegExp("\\[bc\\]at","i");
+
+alert(pattern2.global);
+alert(pattern2.ignoreCase);
+alert(pattern2.multiline);
+alert(pattern2.lastIndex);
+alert(pattern2.source);
+</script>
+</head>
+
+<body>
+</body>
+</html>

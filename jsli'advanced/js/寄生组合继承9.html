@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>寄生组合式继承</title>
+<script>
+function inheritprototype(subType,superType){
+	var prototype=Object(superType.prototype);//创建对象
+	prototype.constructor=Subtype;//增强对象
+	subType.prototype=prototype;//指定对象
+	}
+
+function SuperType(name){
+	this.name=name;
+	this.colors=["red","blue"];
+	}
+SuperType.prototype.sayName=function(){
+		alert(this.name);
+		};
+function SubType(name,age){
+					this.age=age;	
+			//继承属性
+			SuperType.call(this,name);
+}
+inhehritprototype(SubType,SuperType);//替换了SubType.prototype=new SuperType();
+SubType.prototype.sayAge=function(){
+		alert(this.age);
+		};		
+		
+		var instance1=new SubType("hl",10);
+	instance1.colors.push("yellow");	
+	alert(instance1.colors);
+	instance1.sayAge();
+	instance1.sayName();
+		
+	var instance2=new SubType("lh",19);	
+	alert(instance2.colors);
+	instance2.sayAge();
+	instance2.sayName();
+</script>
+</head>
+
+<body>
+</body>
+</html>

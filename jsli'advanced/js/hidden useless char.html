@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>屏蔽字符(这里到底是怎么一回事，阻止按键反应)</title>
+<script src="EventUtil.js"></script>
+<script>
+
+//响应文本框中插入字符的操作是keypress ,因此可以通过阻止这个事件的默认行为来屏蔽此类字符
+
+var textbox=document.getElementById("textbox");
+EventUtil.addHandler(textbox,"keypress",function(event){
+	event = EventUtil.getEvent(event);
+	var target = EventUtil.getTarget(event);
+	var charCode = EventUtil.getCharCode(event);
+	
+	if(!/\d/.test(String.fromCharCode(charCode))&& charCode > 9 &&!event.ctrlKey){//非数字，且，不能响应键盘事件
+		EventUtil.preventDefault(event);
+		}
+	});
+
+//在paste事件中确定剪贴板中的值是否有效，无效，就取消默认行为
+
+EventUtil.addHandler(textbox,"paste",function(event){
+	event = EventUtil.getEvent(event);
+	var text = EventUtil.getClipboardText(event);
+	
+	if(!/^\d*$/.test(text)){
+		EventUtil.preventDefault(event);
+		}
+	});
+
+</script>
+</head>
+
+<body>
+<form>
+<input type="text" id="textbox" name="textbox" value="being happy everyday"/>
+</form>
+</body>
+</html>

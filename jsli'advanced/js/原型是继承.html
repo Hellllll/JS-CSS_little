@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>原型式继承</title>
+<script>
+function object(o){
+	function F(){};
+	F.prototype=o;
+	return new F();
+	}
+var person={
+	name:"hl",
+	friends:["fq","zz","mm"]
+	};
+var anotherperson=object(person);
+anotherperson.name="gred";
+anotherperson.friends.push("rob");
+
+var  yetanother=object(person);
+yetanother.name="ld";
+yetanother.friends.push("bribr");
+
+alert(person.friends);
+</script>
+</head>
+
+<body>
+</body>
+</html>

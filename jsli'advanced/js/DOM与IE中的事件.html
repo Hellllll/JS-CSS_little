@@ -1,0 +1,23 @@
+var EventUtil={
+getButton:function(event){
+if(document.implemention.hasFeature("MouseEvents","2.0"))
+{ return event.button;}
+else{
+switch(event.button){
+case0£º
+case1£º
+case3:
+case5:
+case7:
+return 0;
+case 2:
+case 6:
+return 2;
+case 4£º
+return 1;
+}
+
+}
+
+}
+};

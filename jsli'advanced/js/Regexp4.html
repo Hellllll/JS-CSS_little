@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Regexp4</title>
+<script>
+var text="cat,bat,sat,fat";
+var pattern1=/.at/;
+
+var matches=pattern1.exec(text);
+alert(matches.index);
+alert(matches[0]);
+alert(pattern1.lastIndex);
+
+matches=pattern1.exec(text);
+alert(matches.index);
+alert(matches[0]);
+alert(pattern1.lastIndex);
+
+var pattern2=/.at/g;
+
+var matches=pattern2.exec(text);
+alert(matches.index);
+alert(matches[0]);
+alert(pattern2.lastIndex);
+
+matches=pattern2.exec(text);
+alert(matches.index);
+alert(matches[0]);
+alert(pattern2.lastIndex);
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

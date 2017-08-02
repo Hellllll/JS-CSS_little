@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>关于范围</title>
+<script>
+/*var supportRange=document.implementation.hasFeature("Range","2.0");
+var also=(typeof document.createRange=="function");
+alert(supportRange);
+var range1=document.createRange();
+var range2=document.createRange();
+var range=document.createRange();
+p1=document.getElementById("p1");
+var hello=p1.firstChild.firstChild;
+var world=p1.lastChild;
+range.setStart(hello,2);
+range.setEnd(world,3);
+range.deleteContents();
+
+p1Index=-1;
+var i,len;
+for(i=0,len=p1.parentNode.childNodes.length;i<len;i++){
+	if(p1.parentNode.childNodes[i]==p1){
+		p1Index=i;
+		break;
+		}
+	
+	}
+	range1.setStart(p1.parentNode,p1Index);
+	range1.setEnd(p1.parentNode,p1Idex+1);
+	range2.setStart(p1,0);
+	range2.setEnd(p1,p1.childNodes.length);
+range1.selectNode(p1);
+range2.selectNodeContents(p1);*/
+var p1=document.getElementById("p1");
+
+hello=p1.firstChild.firstChild;
+world=p1.lastChild;
+var range=document.createRange();
+range.setStart(hello,2);
+range.setEnd(world,3);
+
+var span=document.createElement("span");
+span.style.color="red";
+span.appendChild(document.createTextNode("inserted Text"));
+range.insertNode(span);
+/*var fragment=range.contractContents();
+p1.parentNode.appendChild(fragment);*/
+</script>
+</head>
+
+<body>
+<p id="p1"><b>hello</b>world！</p>
+</body>
+</html>

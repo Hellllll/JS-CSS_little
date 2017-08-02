@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>原型的动态性</title>
+<script>
+//还是有些无法理解，没有弄清本质
+
+function Person(){}
+
+//var friend=new Person();
+ Person.prototype={
+	 name:"hl",
+	 age:19,
+	 job:"good student",
+	 sayName:function(){
+		 alert(this.name);
+		 }
+	 };
+	 Object.defineProperty(
+	 Person.prototype,"constructor",{
+		 enumberable:false,
+		 value:Person
+		 }	 
+	 );
+	 var friend=new Person();
+	alert(friend instanceof Object);
+	alert(friend instanceof Person);
+	alert(friend.constructor==Person);
+	
+	 //friend.sayName();//没有error，没有结果？
+</script>
+</head>
+
+<body>
+</body>
+</html>

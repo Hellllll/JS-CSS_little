@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>IE中的事件对象</title>
+<script>
+var btn=document.getElementById("mybtn");
+/*btn.onclick=function(){
+	var event=window.event;
+	alert(event.type);
+};
+btn.attachEvent("onclick",function(event){alert(event.type);});*/
+
+btn.onclick=function(){
+	alert(window.event.srcElement === this);//true
+	window.event.cancelBubble=true;
+	};
+document.body.onclick=function(){
+	alert("Body clicked");
+	};
+btn.attachEvent("onclick",function(event){alert(enent.srcElement === this)});//false
+//returnValue属性与DOM中的preventDefault()方法类似，取消给定事件的默认行为,但在此没有办法确定事件是否被取消
+
+var link=document.getElementById("my");
+link.onclick= function(){
+	window.event.returnValue=false;
+	};
+	
+//cancelBubble属性与stopPropagation（）方法作用相同，用来停止事件冒泡
+</script>
+</head>
+
+<body>
+<input type="button" name="button" value="button" id="mybtn" onclick="alert(event.type)" />
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>pageshow</title>
+<script>
+//怎样使EventUtil变成一个可以像库里面的类一样调用。
+var EventUtil = {
+	addHandler: function(element,type,handler){
+		//省略的代码
+	 if(element.addListener){                    //是否存在DOM2级方法，若存在，采用此方法
+		 element.addListener(type,handler,false);//false表示在冒泡阶段调用事件处理程序，true表示在捕获阶段调用事件处理程序
+		 }else if(element.attachEvent){          //IE方法
+			 element.attachEvent("on"+type,handler);
+	     }else {
+			 element["on"+type]=handler;         //使用DOM0 级方法
+			 }
+		},
+		
+		getEvent: function(event){
+			return event?event:window.event;
+			},
+			
+		getTarget:function(event){
+			return event.target||event.srcElement;
+			},
+		
+		preventDefault: function(event){
+			if(event.preventDefault){
+				event.preventDfault();
+				}
+			else{
+				event.returnValue = false;
+				}
+			},
+		removeHandler: function(element,type,Handler){
+			//省略的代码
+			if(element.addListener){
+				element.addListener(type,handler,false);
+			}else if(element.detachEvent){
+				element.detachEvent("on"+type,handler);
+			}else {
+				element["on"+type]=null;
+				}
+			
+			},
+		stopPropagation: function(event){
+			if(event.stopPropagation){
+				event.stopPropagation();
+				}
+			else{
+				event.cancelBubble = true;
+				}
+			},
+	};
+(function(){
+	var showCount=0;
+	
+	EventUtil.addHandler(window,"load",function(event){
+		
+		alert("Load fired.");
+		});
+	EventUtil.addHandler(window,"pageshow",function(event){
+		showCount++;
+		var event=EventUtil.getEvent(event);
+		alert("Show has been fired"+showCount+"times.Persisted?"+event.persisted);
+		});
+	}
+)();
+//html5中新增的hashchange事件.url的参数序列变化时通知开发人员
+EventUtil.addHandler(window,"hashchange",function(event){
+	alert("old url:"+event.oldURL+"\nNew URL:"+event.newRUL);
+	});
+//最好是使用location对象来确定当前的参数
+EventUtil.addHandler(window,"hashchange",function(event){
+	alert("Current hash:"+location.hash);
+	});
+
+//设备事件orientationchange（ios）
+
+EventUtil.addHandler(window,"load",function(event){
+	var div=document.getElementById("myDiv");
+	div.innerHTML = "current orientation is"+window.orientation;
+	EventUtil.addHandler(window,"orientationchange",function(event){
+	div.innerHTML = "current orientation is"+ window.orientation;
+	});
+	});
+
+//利用事件委托技术解决同一类型事件只为其添加一个事件处理程序
+//适合采用事件委托技术的有：click、mousedown、mouseup、keydown、keyup、keypress(都是事件冒泡)，mouseover和mouseout不宜用;
+var list=document.getElementById("myLinks");
+
+EventUtil.addHandler(list,"click",function(event){//为ul 元素添加事件
+	event=EventUtil.getEvent(event);
+	var target=EventUtil.getTarget(event);//实际的事件目标是li元素
+	switch(target.id){
+		case "doSomething":
+		document.title = "I changed the document's title";
+		break;
+		
+		case "goSomewhere":
+		location.href="http://www.wrox.com";
+		break;
+		case "sagHi":
+		alert("hi");
+		break;
+		}
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

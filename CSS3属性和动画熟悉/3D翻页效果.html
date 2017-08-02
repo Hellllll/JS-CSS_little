@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>three-d turn-page</title>
+	<style>
+		body, div {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			margin: 40px auto;
+		}
+		/* 3d效果的窗口，即我们从哪里看 */
+		.position {
+			-webkit-perspective: 1000;
+			-webkit-perspective-origin: 50% 50%;
+			overflow: hidden;
+		}
+		/*需要有效果的一组图片*/
+		.view {
+			width: 400px;
+			height: 400px;
+			margin: 0 auto;
+			-webkit-transform-style: preserve-3d;
+			position: relative;
+
+		}
+		.content {
+			width: 360px;
+			height: 360px;
+			padding: 20px; /*如果没有padding就会不正确显示*/
+			position: absolute;
+			background-color: black;
+			color: #fff;
+			font-weight: bold;
+			font-size: 360px;
+			text-align: center;
+			line-height: 360px;
+		}
+		#page1 {
+			-webkit-transform-origin: bottom;
+			-webkit-transition: -webkit-transform 1s linear;
+		}
+		#page2, #page3, #page4, #page5, #page6 {
+			-webkit-transform-origin: bottom;
+			-webkit-transition: -webkit-transform 1s linear;
+			-webkit-transform: rotateX(90deg);
+		}
+		.but {
+			text-align: center;
+			margin: 20px auto;
+		}
+	</style>
+	<script>
+	var currIndex = 1;
+		function next() {			
+			if(currIndex == 6) return;
+			var currP = document.getElementById("page" + currIndex);
+			currP.style.webkitTransform = "rotateX(-90deg)";
+			currIndex++;
+			var nextP = document.getElementById("page" + currIndex);
+			nextP.style.webkitTransform = "rotateX(0deg)";
+		}
+
+		function pres() {
+			if (currIndex == 1) return;
+			var currP = document.getElementById("page" + currIndex);
+			currP.style.webkitTransform = "rotateX(90deg)";
+			currIndex-- ;
+			var presP = document.getElementById("page" + currIndex);
+			presP.style.webkitTransform = "rotateX(0deg)";
+
+		}
+	</script>
+</head>
+<body>
+	<div class="position">
+		<div class="view">
+			<div class="content" id="page1">1</div>
+			<div class="content" id="page2">2</div>
+			<div class="content" id="page3">3</div>
+			<div class="content" id="page4">4</div>
+			<div class="content" id="page5">5</div>
+			<div class="content" id="page6">6</div>
+		</div>		
+	</div>
+	<div class="but">
+		<a href="#" id="pres" onclick="javascript:pres();">pres</a>
+		<a href="#" id="next" onclick="javascript:next();">next</a>
+	</div>
+</body>
+</html>

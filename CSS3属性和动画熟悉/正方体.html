@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正方体</title>
+	<style>
+		body, div {
+			margin: 0;
+			padding: 0;
+		}
+		/* 3d观察窗口 */
+		.view {
+			-webkit-perspective: 800px;
+			-webkit-perspective: 50% 50%;
+			overflow: hidden;
+		}
+		/*包含正方体的容器*/
+		.pages {
+			width: 200px;
+			height: 200px;
+			-webkit-transform-style: preserve-3d;
+			margin: 100px auto;
+			position: relative;
+			
+		}
+		.page {
+			/*宽高*/
+			width: 160px;
+			height: 160px;
+			/*文字设置*/
+			background-color: green; 
+			text-align: center;
+			line-height: 160px;
+			font-size: 100px;
+			padding: 20px;
+			
+			color: white;
+			/*3d旋转位置*/
+			position: absolute;
+			-webkit-transform-origin:bottom;
+			-webkit-transition: -webkit-transform 1s linear;
+		}
+		/*后面*/
+		#page2 {
+			-webkit-transform: translateZ(-160px);
+		}
+		/*下面*/
+		#page3 {
+			-webkit-transform: rotateX(90deg);
+		}
+		/*上面*/
+		#page4 {
+			-webkit-transform-origin: top;
+			-webkit-transform: rotateX(-90deg);
+			//-webkit-transform: translateY(-160px);
+		}
+		/*左面*/
+		#page5 {
+			-webkit-transform-origin: left;
+			-webkit-transform: rotateY(90deg);
+			//-webkit-transform: translateZ(-160px);
+		}
+		/*右面*/
+		#page6 {
+			-webkit-transform-origin: right;
+			-webkit-transform: rotateY(-90deg);
+			//-webkit-transform: translateZ(-160px);
+		}
+		.change {
+			margin: 0 auto;
+			width:721px;
+			height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="view">
+		<div class="pages">
+			<div class="page" id="page1">1</div>
+			<div class="page" id="page2">2</div>
+			<div class="page" id="page3">3</div>
+			<div class="page" id="page4">4</div>
+			<div class="page" id="page5">5</div>
+			<div class="page" id="page6">6</div>
+		</div>
+	</div>
+	<div class="change">
+		<span>0deg</span>
+		<input type="range">
+		<span>180deg</span>
+	</div>
+</body>
+</html>

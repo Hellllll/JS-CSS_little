@@ -1,0 +1,44 @@
+<!--块级元素格式化上下文
+触发BFC（block formatting context）标准浏览器
+a、 float的值不为none 
+b、overflow的值不为visible
+c、display的值不为table-cell,table-caption,inline-block中的任何一个
+d、position的值不为relative和static
+e、width\height\min-width\min-height:(!auto)
+
+当触发BFC时，应该怎么解决这个问题。一般的用法是怎样的。
+
+haslayout  IE 浏览器
+a、wrinting-mode:tb-rl
+b、-ms-writing-mode:tb-rl
+c、zoom:(!normal)
+
+css兼容性问题：
+
+margin兼容性问题
+display:inline-block
+IE6最小高度：19px
+IE6双边距
+li里元素都浮动li在IE6 7 下方会产生4px间隙问题
+浮动元素之间注释，导致多多复制一个文字问题
+IE6 7 父级元素的overflow：hidden是包不住子级的relative的
+IE6下绝对定位元素父级宽高是奇数，绝对定位元素的right和bottom值会有1px的偏差
+IE6 局对定位元素和浮动元素并列绝对定位元素消失
+ie6下input的间隙
+IE6下输入类型表单控件背景问题
+
+IE6下设置透明度的方法
+_background-image:none;
+_filter:alpha(opacity=（0~100）)
+
+清除浮动的方法（：after 伪类）
+.clearfix{
+	*zoom:1;
+}
+.clearfix:after{
+	content:"";
+	display: block;
+	clear:both;
+}
+
+-->

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>IE8及更早版本的范围Range</title>
+<script>
+//DOM2级规范定义了一些模块，用于增强DOM1级。
+var p1=document.getElementById("p1");
+/*var range=document.body.createTextRange();
+range.moveToElementText();
+var found=range.findText("Hello");
+alert(range.htmlText);
+var ancester=range.parentElement;
+range.moveStart("word",2);
+range.moveEnd("character",1);
+range.move("character",5);//移动五个字符，让起点与终点相等
+//操作范围中的内容text,pasteHTML()
+range.text="howdy";
+range.pasteHTML("<em>Howdy</em>");
+//折叠范围collapse()参数为true时，将范围折叠到起点，反之终点
+range.collapse(true);
+var isCollapsed=(range.boundingwidth==0);*/
+
+//比较IE范围compareEndPoints()与compareBoundaryPoints()方法类似
+//接受两个参数，StartToStart。。。。
+
+var range1=document.body.createTextRange();
+var range2=document.body.createTextRange();
+
+range1.findText("Hello world!");
+range2.findText("Hello");
+
+alert(range1.compareEndPoints("StartToStart",range2));
+alert(range1.compareEndPoints("EndToEnd",range2));
+//复制一个范围
+var newRange=range.duplicate();
+</script>
+</head>
+
+<body>
+<p id="p1"><b>Hello</b>world!</p>
+
+</body>
+</html>

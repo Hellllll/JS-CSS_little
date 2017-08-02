@@ -1,0 +1,10 @@
+媒体类型的引用方法：link标签，@import，@media
+
+1.<link rel="stylesheet" type="text/css"
+href="style.css" media="screen"/>
+
+2.@importurl(style.css) screen;
+
+3.@media screen {
+	选择器{/*样式代码*/}
+}

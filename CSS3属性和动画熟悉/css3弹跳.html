@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弹跳设置</title>
+	<style>
+		@keyframes bounce {
+			60%, 80% to {
+				transform: translateY(350px);
+			}
+			70% {
+				transform: translateY(250px);
+			}
+			90% {
+				transform: translateY(280px);
+			}
+		}
+		.div {
+			display: block;
+			width: 50px;
+			height: 50px;
+			border-radius: 50% 50%;
+			background: green;
+			border: 1px solid red;
+			margin: 40px auto;
+			animation: bounce 1s cubic-bezier(.1, .25, 1, .25);
+		}
+		/*.div:hover {
+			animation: bounce 1s ease-out;
+		}*/
+	</style>
+</head>
+<body>
+	<a href="#" class="div">
+		
+	</a>
+</body>
+</html>

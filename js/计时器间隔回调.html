@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>send and accept</title>
+</head>
+<body>
+	<div id="box">计时器间隔回调</div>	
+	<!-- <button id="textButton" type="button">Go!</button> -->
+	<!-- <script src="../../../../scripts/jquery-3.1.0.min.js"></script>
+	<script>
+		//回调
+		$('#testButton').click(function() {
+
+			var $elem = $('#testSubject');
+			$elem.html('Loading...');
+
+			$.ajax({
+				url: "柔性衰减的例子.html",
+				success: function(html) {
+					$elem.html(html);
+				}
+			});
+		});
+	</script> -->
+	<script>
+		//计时器
+		function animated(elementId) {
+			var elem = document.getElementById(elementId);
+			var tick = 0;
+
+			var timer = setInterval(function(){
+				if(tick < 100) {
+					elem.style.left = elem.style.top = tick + "px";
+					tick++;
+				} else {
+					clearInterval(timer);
+					console.log(tick);
+					console.log(elem);
+					console.log(timer);
+				}
+			}, 10);
+		}
+		animated('box');
+	</script>
+</body>
+</html>

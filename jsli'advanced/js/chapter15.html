@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>canvas绘图练习操作</title>
+<script>
+var drawing = document.getElementById("drawing");
+//绘制一个不带数字的时钟盘
+//确定浏览器支持canvas对象  isPointInPath() 
+if(drawing.getContext){
+	var context = drawing.getContext("2d");
+	//开始路径
+	context.beginPath();
+	//绘制外圆               起始和结束弧度
+	context.arc(100,100,99,0,2*Math.PI,false);//false 表示顺时针旋转
+	//绘制内圆
+	context.moveTo(194,100);
+	context.arc(100,100,94,0,2*Math.PI,false);
+	
+	//绘制分针
+	context.moveTo(100,100);
+	context.lineTo(100,15);//从上一点到xy截止。
+	
+	//绘制时针
+	context.moveTo(100,100);
+    context.lineTo(35,100);
+	
+	//另一种方法，转换原点，
+    context.translate(100,100);//都是表示坐标
+	//旋转表针
+	context.rotate(1);//向右旋转了一定角度
+
+	//绘制分针
+	context.moveTo(0,0);//现在的原点在（100,100）的位置
+	context.lineTo(0,-85);
+	
+	//绘制时针
+	context.moveTo(0,0);
+	context.lineTo(-65,0);
+	//描边路径
+	context.stroke();
+	
+	//绘制文本
+	
+	context.font = "bold 14px Arial";
+	context.textAlign = "center";
+	contect.textBaseline = "middle";
+	context.fillText("12",100,20);
+	
+	//设置阴影
+	
+	context.shadowOffsetX = 5;
+	context.shadowOffsetY = 5;
+	context.shadowBlur = 4;//模糊的像素数
+	context.shadowColor = "rgba(0,0,0,0.5)";
+	
+	//渐变
+	var gradient = context.createLinearGradient(30,30,70,70);//渐变的区域
+	
+	gradient.addColor(0,"white");//用来指定色标
+	gradient.addColor(1,"black");//色标位置是0到1的值
+	
+	//绘制渐变图形
+	context.fillStyle = gradient;
+	context.fillRect(30,30,50,50);//确保渐变与形状对其非常重要
+	
+	//因此可以使用下列函数
+	function createRectLinearGradient(context,x,y,width,height){
+		return context.createLinearGradient(x,y,x+width,y+height);
+		}
+	var gradient = createRectLinearGradient(context,30,30,50,50);
+	
+	//径向渐变
+	var gradient = context.createRadialGradient(55,55,10,55,55,30);
+	
+	//模式：重复的图像createPattern（）
+	
+	var image = document.images[0],
+	pattern = context.createPattern(image,"repeat");
+	
+	context.fillStyle = pattern;
+	context.fillRect(10,10,150,150);
+	//绘制全局透明度
+	context.globalAlpha = 0.5;//以下的元素都将显示为半透明度
+	
+	//globalCompositionOperation表示后绘制的图像怎样与前面的结合
+	context.globalCompositionOperation = "destination-over";//后面的在下面	
+	}
+
+
+/*if(drawing.getContext){
+	var context = drawing.getContext("2d");
+	//绘制图的结果取决于fillStyle，strokeStyle。
+	context.strokeStyle = "red";
+	context.fillStyle = "#0000ff";
+	
+	//绘制矩形，唯一可以直接在2d上下文中绘制的,fillRect()填充整个矩形;strokeRect()以指定的颜色描边。关于线条的说明：lineWidth属性线宽，lineCap线条末端的形状（平，园，方），lineJoin线条想交的方式;clearRect()根据指定的区域清除;
+	context.fillRect(10,10,50,50);//x.y轴，长宽。
+	
+	context.fillStyle = "rgba(0,0,255,0.5)";
+	context.fillRect(30,30,50,50);
+	
+	context.clearRect(40,40,10,10);
+	//取得图像的URL，使用toDataURL（）方法可以导出在<canvas>上绘制的图像
+	var imgURL = drawing.toDataURL("image/png");
+	//显示图像
+	var image = document.createElement("img");
+	image.src = imgURL;
+	document.body.appendChild(image);
+	
+	}*/
+	
+	//WebGL 上下文
+	if(drawing.getContext){
+	try{var gl = drawing.getContext("experimental-webgl",{ alpha:false});
+	}
+	catch(ex){}
+	if(gl){}
+	}
+	
+	//实色清除clearColor（）
+	gl.clearColor(0,0,0,1);//black
+	gl.clear(gl.COLOR_BUFFER_BIT);
+	
+	//视口
+	pl.viewport(0, 0, drawing.width, drawing.height);//就可以只在<canvas>部分区域绘图
+	
+	//缓冲区
+	var buffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAR_BUFFER, buffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0.5, 1]), gl.STATIC_DRAW);
+	
+	//出错
+	var errorCode = gl.getError();
+	while(errorCode){
+		console.log("Error occured:" + errorCode);
+		errorCode = gl.getError();
+		
+		
+		
+		}
+	
+	
+</script>
+</head>
+
+<body>
+<canvas id="drawing" width="200px" height="200px">A drawing of something.</canvas>
+</body>
+</html>

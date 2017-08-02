@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>自动切换焦点(怎么又没效果)</title>
+
+<script src="EventUtil.js"></script>
+<script>
+(function(){
+	
+	function tabForward(event){
+		event = EventUtil.getEvent(event);
+		var target = EventUtil.getTarget(event);
+		
+		if(target.value.length == target.maxlength){
+			var form = target.form;
+			
+			for(var i=0,len=form.elements.length;i < len;i++){
+				if(form.elements[i] == target){
+					if(form.elements[i+1]){
+						form.elements[i+1].focus();
+						}
+					return;
+					}
+				}
+			}
+		}
+	
+	var t1 = document.getElementById("txtTell1");
+	var t2 = document.getElementById("txtTell2");
+	var t3 = document.getElementById("txtTell3");
+	
+	EventUtil.addHandler(t1,"keyup",tabForward);
+	EventUtil.addHandler(t2,"keyup",tabForward);
+	EventUtil.addHandler(t3,"keyup",tabForward);	
+	})();
+</script>
+</head>
+
+
+<body>
+<form>
+<input type="text" name="tel1" id="txtTell1" maxlength="3"/>
+<input type="text" name="tel2" id="txtTell2" maxlength="3"/>
+<input type="text" name="tel3" id="txtTell3" maxlength="4"/>
+</form>
+</body>
+</html>
